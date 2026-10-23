@@ -8,6 +8,10 @@ public class ContadorCompartido {
     public void incrementarInseguro() { totalInseguro++; }
     public int getTotalInseguro() { return totalInseguro; }
 
+    public synchronized void incrementarSincronizado() { totalSincronizado++; }
+    public synchronized int getTotalSincronizado() { return totalSincronizado; }
 
+    public void incrementarAtomico() { totalAtomico.incrementAndGet(); }
+    public int getTotalAtomico() { return totalAtomico.get(); }
 
 }
