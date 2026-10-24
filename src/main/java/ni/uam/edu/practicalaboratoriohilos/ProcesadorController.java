@@ -1,7 +1,5 @@
-package app;
+package ni.uam.edu.practicalaboratoriohilos;
 
-import app.tareas.ContadorCompartido;
-import app.tareas.ControlProcesamiento;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -9,18 +7,12 @@ import javafx.scene.control.TextArea;
 
 public class ProcesadorController {
 
-    @FXML
-    private Button btnIniciar;
-    @FXML
-    private Button btnDetener;
-    @FXML
-    private Label lblEstadoVentanillaA;
-    @FXML
-    private Label lblEstadoVentanillaB;
-    @FXML
-    private Label lblContador;
-    @FXML
-    private TextArea txtAreaLog;
+    @FXML private Button btnIniciar;
+    @FXML private Button btnDetener;
+    @FXML private Label lblEstadoVentanillaA;
+    @FXML private Label lblEstadoVentanillaB;
+    @FXML private Label lblContador;
+    @FXML private TextArea txtAreaLog;
 
     private ContadorCompartido contadorCompartido;
     private ControlProcesamiento tareaA;
@@ -61,7 +53,6 @@ public class ProcesadorController {
 
         btnDetener.setDisable(true);
 
-        // Hilo monitor para detectar cuando terminan de forma segura y reajustar la interfaz
         new Thread(() -> {
             try {
                 if (hiloA != null) hiloA.join();

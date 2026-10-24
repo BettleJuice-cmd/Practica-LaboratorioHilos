@@ -1,5 +1,4 @@
-package app.tareas;
-import app.ContadorCompartido;
+package ni.uam.edu.practicalaboratoriohilos;
 
 import javafx.application.Platform;
 
@@ -43,12 +42,10 @@ public class ControlProcesamiento implements Runnable {
 
         try {
             for (int i = 1; i <= 50 && activo && !Thread.currentThread().isInterrupted(); i++) {
-                Thread.sleep(250); // Simula el procesamiento de una unidad de trabajo
+                Thread.sleep(250);
 
-                // Incrementa el contador compartido
                 contador.incrementar();
 
-                // Notifica cambios a la UI de forma segura
                 if (actualizarVistaCallback != null) {
                     Platform.runLater(actualizarVistaCallback);
                 }
@@ -63,7 +60,6 @@ public class ControlProcesamiento implements Runnable {
             }
 
         } catch (InterruptedException e) {
-            // Cumpliendo la regla de no ignorar la InterruptedException
             Thread.currentThread().interrupt();
             setEstado(EstadoVentanilla.DETENIDO);
         }
