@@ -15,4 +15,21 @@ public class PruebaEstacion3 {
             Thread t1_ins = new Thread(tareaInsegura); Thread t2_ins = new Thread(tareaInsegura);
             Thread t1_sin = new Thread(tareaSincronizada); Thread t2_sin = new Thread(tareaSincronizada);
             Thread t1_ato = new Thread(tareaAtomica); Thread t2_ato = new Thread(tareaAtomica);
+
+            t1_ins.start(); t2_ins.start();
+            t1_sin.start(); t2_sin.start();
+            t1_ato.start(); t2_ato.start();
+
+            try {
+                t1_ins.join(); t2_ins.join();
+                t1_sin.join(); t2_sin.join();
+                t1_ato.join(); t2_ato.join();
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+
+            System.out.printf("Prueba %2d | Inseguro: %4d | Sincronizado: %4d | Atómico: %4d%n",
+                    prueba, contador.getTotalInseguro(), contador.getTotalSincronizado(), contador.getTotalAtomico());
+        }
+    }
 }
