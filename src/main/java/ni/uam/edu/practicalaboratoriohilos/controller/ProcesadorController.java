@@ -1,5 +1,8 @@
-package ni.uam.edu.practicalaboratoriohilos;
+package ni.uam.edu.practicalaboratoriohilos.controller;
 
+import ni.uam.edu.practicalaboratoriohilos.modelo.ContadorCompartido;
+import ni.uam.edu.practicalaboratoriohilos.tareas.ControlProcesamiento;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -7,12 +10,20 @@ import javafx.scene.control.TextArea;
 
 public class ProcesadorController {
 
-    @FXML private Button btnIniciar;
-    @FXML private Button btnDetener;
-    @FXML private Label lblEstadoVentanillaA;
-    @FXML private Label lblEstadoVentanillaB;
-    @FXML private Label lblContador;
-    @FXML private TextArea txtAreaLog;
+    @FXML
+    private Label lblEstado;
+
+    @FXML
+    private Label lblContador;
+
+    @FXML
+    private Button btnIniciar;
+
+    @FXML
+    private Button btnDetener;
+
+    @FXML
+    private TextArea txtRegistro;
 
     private ContadorCompartido contadorCompartido;
     private ControlProcesamiento tareaA;
@@ -22,15 +33,17 @@ public class ProcesadorController {
 
     @FXML
     public void initialize() {
-        btnDetener.setDisable(true);
+        if (btnDetener != null) {
+            btnDetener.setDisable(true);
+        }
     }
 
     @FXML
-    private void handleIniciar() {
+    private void iniciarProcesamiento() {
         contadorCompartido = new ContadorCompartido();
         btnIniciar.setDisable(true);
         btnDetener.setDisable(false);
-        txtAreaLog.appendText("--- Iniciando sesión de procesamiento ---\n");
+        txtRegistro.appendText("--- Inicio del procesamiento ---\n");
 
         tareaA = new ControlProcesamiento("Ventanilla-A", contadorCompartido, this::actualizarUI);
         tareaB = new ControlProcesamiento("Ventanilla-B", contadorCompartido, this::actualizarUI);
@@ -43,8 +56,8 @@ public class ProcesadorController {
     }
 
     @FXML
-    private void handleDetener() {
-        txtAreaLog.appendText("Solicitud de detención enviada...\n");
+    private void detenerProcesamiento() {
+        txtRegistro.appendText("Solicitud de detención enviada...\n");
         if (tareaA != null) tareaA.detener();
         if (tareaB != null) tareaB.detener();
 
@@ -60,22 +73,20 @@ public class ProcesadorController {
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
             }
-            javafx.application.Platform.runLater(() -> {
+            Platform.runLater(() -> {
                 btnIniciar.setDisable(false);
-                txtAreaLog.appendText("--- Todos los hilos han terminado de forma segura ---\n");
+                lblEstado.setText("Estado: Detenido");
+                txtRegistro.appendText("--- Procesamiento detenido de forma segura ---\n");
             });
         }).start();
     }
 
     public void actualizarUI() {
-        if (tareaA != null) {
-            lblEstadoVentanillaA.setText("Ventanilla A: " + tareaA.getEstado());
-        }
-        if (tareaB != null) {
-            lblEstadoVentanillaB.setText("Ventanilla B: " + tareaB.getEstado());
+        if (tareaA != null && tareaB != null) {
+            lblEstado.setText("Ventanilla A: " + tareaA.getEstado() + " | Ventanilla B: " + tareaB.getEstado());
         }
         if (contadorCompartido != null) {
-            lblContador.setText("Total Operaciones: " + contadorCompartido.getTotal());
+            lblContador.setText("Contador: " + contadorCompartido.getTotalSincronizado());
         }
     }
 }

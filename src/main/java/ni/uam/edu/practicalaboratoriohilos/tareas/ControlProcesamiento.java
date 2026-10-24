@@ -1,5 +1,6 @@
-package ni.uam.edu.practicalaboratoriohilos;
+package ni.uam.edu.practicalaboratoriohilos.tareas;
 
+import ni.uam.edu.practicalaboratoriohilos.modelo.ContadorCompartido;
 import javafx.application.Platform;
 
 public class ControlProcesamiento implements Runnable {
@@ -42,10 +43,14 @@ public class ControlProcesamiento implements Runnable {
 
         try {
             for (int i = 1; i <= 50 && activo && !Thread.currentThread().isInterrupted(); i++) {
-                Thread.sleep(250);
+                Thread.sleep(250); // Simulación de procesamiento
 
-                contador.incrementar();
+                // Usamos el método sincronizado o atómico de tu compañero
+                if (contador != null) {
+                    contador.incrementarSincronizado();
+                }
 
+                // Actualizar interfaz mediante Platform.runLater
                 if (actualizarVistaCallback != null) {
                     Platform.runLater(actualizarVistaCallback);
                 }

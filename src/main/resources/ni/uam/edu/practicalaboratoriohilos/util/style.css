@@ -1,0 +1,68 @@
+/* Fondo general con el azul marino oscuro de la paleta */
+.root {
+    -fx-background-color: #0b1f36;
+    -fx-font-family: 'Segoe UI', Helvetica, Arial, sans-serif;
+}
+
+/* Etiquetas generales con el tono celeste claro de la paleta */
+.label {
+    -fx-text-fill: #9bc4e2;
+    -fx-font-size: 13px;
+}
+
+/* Estilo base para los botones */
+.button {
+    -fx-cursor: hand;
+    -fx-background-radius: 6px;
+    -fx-font-weight: bold;
+    -fx-padding: 8px 18px;
+    -fx-font-size: 13px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0, 0, 0, 0.4), 6, 0, 0, 2);
+}
+
+/* Botón Iniciar: Azul medio de la paleta */
+#btnIniciar {
+    -fx-background-color: #2088b2;
+    -fx-text-fill: #ffffff;
+}
+
+#btnIniciar:hover {
+    -fx-background-color: #299bc7;
+}
+
+#btnIniciar:pressed {
+    -fx-background-color: #176d91;
+}
+
+/* Botón Detener: Naranja vibrante de la paleta */
+#btnDetener {
+    -fx-background-color: #ff7b00;
+    -fx-text-fill: #ffffff;
+}
+
+#btnDetener:hover {
+    -fx-background-color: #ff9124;
+}
+
+#btnDetener:pressed {
+    -fx-background-color: #d66700;
+}
+
+/* Estado deshabilitado del botón */
+.button:disabled {
+    -fx-background-color: #162b48;
+    -fx-text-fill: #4b6b94;
+    -fx-cursor: default;
+    -fx-effect: null;
+}
+
+/* Consola / Área de registro integrada con la misma paleta */
+.text-area {
+    -fx-background-color: #071324;
+    -fx-text-fill: #9bc4e2;
+    -fx-control-inner-background: #071324;
+    -fx-background-radius: 6px;
+    -fx-border-color: #2088b2;
+    -fx-border-radius: 6px;
+    -fx-border-width: 1px;
+}
