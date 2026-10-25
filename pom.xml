@@ -61,7 +61,7 @@
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>
-                                ni.uam.edu.practicalaboratoriohilos/ni.uam.edu.practicalaboratoriohilos.HelloApplication
+                                ni.uam.edu.practicalaboratoriohilos/ni.uam.edu.practicalaboratoriohilos.app.ProcesadorApp
                             </mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
